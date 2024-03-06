@@ -1,0 +1,19 @@
+Mayor Valor = 
+VAR GetAllMarket = ALLSELECTED(Accesos[Ult_Fecha_Acceso].[Día])
+VAR GetMaxValue = MAXX(GetAllMarket,CALCULATE(count(Accesos[_Dia Grupo])))
+VAR Top2Value = GetMaxValue - 5
+VAR Top3Value = GetMaxValue - 10
+VAR Top4Value = GetMaxValue - 15
+VAR Top5Value = GetMaxValue - 20
+VAR Top6Value = GetMaxValue - 40
+RETURN
+SWITCH(
+    TRUE()
+    ,COUNT(Accesos[_Dia Grupo]) = GetMaxValue,"#F5C869"
+    ,COUNT(Accesos[_Dia Grupo]) < GetMaxValue && COUNT(Accesos[_Dia Grupo]) >= Top2Value,"#4264AF"
+    ,COUNT(Accesos[_Dia Grupo]) < Top2Value && COUNT(Accesos[_Dia Grupo]) >= Top3Value,"#6480BF"
+    ,COUNT(Accesos[_Dia Grupo]) < Top3Value && COUNT(Accesos[_Dia Grupo]) >= Top4Value,"#839ACD"
+    ,COUNT(Accesos[_Dia Grupo]) < Top4Value && COUNT(Accesos[_Dia Grupo]) >= Top5Value,"#9DB0D9"
+    ,COUNT(Accesos[_Dia Grupo]) < Top5Value && COUNT(Accesos[_Dia Grupo]) >= Top6Value,"#AFBFE1"
+    ,COUNT(Accesos[_Dia Grupo]) < Top6Value,"#D1DBF1"
+)
